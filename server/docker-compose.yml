@@ -1,0 +1,48 @@
+version: "3.9"
+services:
+  api:
+    build: .
+    container_name: videocall-api
+    env_file: .env
+    depends_on:
+      - livekit
+      - db
+      - redis
+    ports:
+      - "${APP_PORT}:8080"
+    restart: unless-stopped
+
+  livekit: 
+    image: livekit/livekit-server:latest
+    container_name: livekit
+    command: ["--config", "/config/livekit.yaml"]
+    volumes:
+      - ./livekit.yaml:/config/livekit.yaml:ro
+    ports:
+      - "7880:7880"                # signaling HTTP/WS
+      - "7881:7881/tcp"            # rtc tcp
+      - "7881:7881/udp"            # rtc udp
+      - "50000-60000:50000-60000/udp"  # media udp range
+    restart: unless-stopped
+
+  db:
+    image: postgres:16
+    container_name: videocall-db
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: videocall
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:7
+    container_name: videocall-redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+  volumes: 
+    pgdata:
