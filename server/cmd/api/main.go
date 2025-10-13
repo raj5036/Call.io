@@ -1,13 +1,22 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"github.com/raj5036/callio/internal/config"
 	httpx "github.com/raj5036/callio/internal/http"
 	livekitx "github.com/raj5036/callio/internal/livekit"
 )
+
+func init() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		fmt.Printf("Error loading .env file")
+	}
+}
 
 func main() {
 	cfg := config.FromEnv()
