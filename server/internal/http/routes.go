@@ -25,7 +25,7 @@ func (r *Routes) Register(engine *gin.Engine) {
 	{
 		api.POST("/token", func(ctx *gin.Context) {
 			var req struct {
-				Room string `json:"room" binding:"required"`
+				Room string `json:"room" binding:"required,min=1"`
 			}
 
 			if err := ctx.ShouldBindJSON(&req); err != nil {
