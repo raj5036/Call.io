@@ -10,13 +10,14 @@
 # Commands:
 1. App startup command: `go run .\cmd\api\main.go`
 
-# Todo: 
+# Important Docs:
+1. [LiveKit react docs](https://docs.livekit.io/home/quickstarts/react/)
 
+# Todo: 
 1. Add graceful shutdown (context.WithTimeout) for your Gin server.
 2. Add logging middleware (e.g., zerolog or zap).
 3. Add CORS middleware for frontend connection.
 4. Deploy backend + LiveKit container on your dev VPS / EC2.
 
 # Bugs
-
 1. Develop a middleware that will give errors for empty request body (Test with "/api/token" -> { err: EOF })

@@ -1,0 +1,30 @@
+# .air.toml — Auto-reload configuration for your Go backend
+
+root = "."
+tmp_dir = "tmp"
+
+[build]
+  # Build your main.go into tmp/main
+  cmd = "go build -o ./tmp/main ."
+  bin = "tmp/main"
+  full_bin = "./tmp/main"
+  delay = 1000
+  log = "air-build.log"
+
+[log]
+  time = true
+  color = true
+
+[color]
+  main = "cyan"
+  watcher = "yellow"
+  build = "green"
+  runner = "blue"
+
+[watch]
+  include_ext = ["go", "env"]
+  exclude_dir = ["vendor", "tmp", "node_modules", "dist"]
+
+[env]
+  APP_ENV = "development"
+  PORT = "8080"

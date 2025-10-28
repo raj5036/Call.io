@@ -10,6 +10,11 @@ import (
 
 func RequiredUser(secret string) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		if c.Request.Method == http.MethodOptions {
+			c.Next() // don't block preflight
+			return
+		}
+
 		h := c.GetHeader("Authorization")
 		if !strings.HasPrefix(h, "Bearer ") {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Missing Bearer token"})
