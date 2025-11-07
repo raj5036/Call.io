@@ -9,6 +9,7 @@
 
 # Commands:
 1. App startup command: `go run .\cmd\api\main.go`
+2. `cd` into `server`, and run `air` in terminal.
 
 # Important Docs:
 1. [LiveKit react docs](https://docs.livekit.io/home/quickstarts/react/)

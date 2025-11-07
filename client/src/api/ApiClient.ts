@@ -15,5 +15,25 @@ export const ApiClient = {
 					throw new Error(err);
 				})
 		}
-	}
+	},
+	Auth: {
+		login: (payload: { email: string, password: string }) => {
+			return Promise.resolve(
+				axiosInstance.post(`${SERVER_BASE_URL}/auth/login`, payload)
+			)
+				.then(res => res.data)
+				.catch(err => {
+					throw new Error(err);
+				})
+		},
+		signup: (payload: { name: string, email: string, password: string }) => {
+			return Promise.resolve(
+				axiosInstance.post(`${SERVER_BASE_URL}/auth/signup`, payload)
+			)
+				.then(res => res.data)
+				.catch(err => {
+					throw new Error(err);
+				})
+		},
+	},
 }
